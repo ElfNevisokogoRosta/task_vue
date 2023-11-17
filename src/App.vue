@@ -1,13 +1,15 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import {  RouterView } from 'vue-router'
 </script>
 
 <template>
   <header>
-    <nav>
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/register">Register</RouterLink>
-    </nav>
+    <div class="subheade-wraper">
+      <h2>TaskMaster</h2>
+      <div class="image-wraper">
+        <img class="logo-img" src="@/assets/logo.png" alt="" />
+      </div>
+    </div>
   </header>
 
   <RouterView />

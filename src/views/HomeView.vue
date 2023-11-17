@@ -5,12 +5,7 @@ import TaskList from '../components/TaskList.vue'
 
 <template>
   <main>
-    <div class="subheade-wraper">
-      <h2>TaskMaster</h2>
-      <div class="image-wraper">
-        <img class="logo-img" src="../assets/logo.png" alt="" />
-      </div>
-    </div>
+    
     <div class="componet-wraper">
         <TaskForm />
         <TaskList />

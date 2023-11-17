@@ -1,13 +1,36 @@
+<script setup>
+import { useTaskStore } from '../pinia/store/store';
+import { ref } from 'vue';
+import {nanoid} from 'nanoid'
+
+const store = useTaskStore();
+const task = ref({
+  id: nanoid(),
+  title: '',
+  description: '',
+  complete: false,
+})
+
+const taskHandler = (e)=>{
+  const fieldName  = e.target.name
+  task.value[fieldName] = e.target.value
+}
+
+function addTask (e){
+  store.addTask(task.value);
+  e.target.reset()
+}
+</script>
 <template>
   <div class="container">
     <h2 class="title">Add some task</h2>
-    <form action="">
+    <form @submit.prevent="addTask" >
       <div class="form-container">
         <label class="input-box " for="">
-          <input class="input-title" type="text" />
+          <input @change="taskHandler" class="input-title" name="title" type="text" />
         </label>
         <label class="input-box" for="">
-          <textarea class="input-des" id="story" name="story" rows="5" cols="33"> </textarea>
+          <textarea @change="taskHandler" class="input-des" id="story" name="dis" rows="5" cols="33"> </textarea>
         </label>
         <button>Add task</button>
       </div>
