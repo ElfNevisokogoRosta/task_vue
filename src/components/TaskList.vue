@@ -15,9 +15,7 @@ const onEnd = (e) => {
   store.editTask(id)
 }
 </script>
-git config --get-all user.name [1ms]
-git config --get commit.template [18ms]
---add                 add a new variable: name value
+
 <template>
   <div class="task-holder">
     <h2>In Progress</h2>
