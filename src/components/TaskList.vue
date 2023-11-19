@@ -1,20 +1,32 @@
-<script setup>
+<script>
 import TaskElement from './TaskElement.vue'
 import { useTaskStore } from '../pinia/store/store'
 
-const store = useTaskStore()
+export default {
+  components: {
+    TaskElement
+  },
+  setup() {
+    const store = useTaskStore()
 
-const getList = (list) => {
-  return store.tasks.filter((t) => t.list === list)
-}
-const startDrag = (e, i) => {
-  e.dataTransfer.dropEffect = 'move'
-  e.dataTransfer.effectAllowed = 'move'
-  e.dataTransfer.setData('itemID', i.id)
-}
-const onDrop = (e) => {
-  const id = e.dataTransfer.getData('itemID')
-  store.editTask(id)
+    const getList = (list) => {
+      return store.tasks.filter((t) => t.list === list)
+    }
+    const startDrag = (e, i) => {
+      e.dataTransfer.dropEffect = 'move'
+      e.dataTransfer.effectAllowed = 'move'
+      e.dataTransfer.setData('itemID', i.id)
+    }
+    const onDrop = (e) => {
+      const id = e.dataTransfer.getData('itemID')
+      store.editTask(id)
+    }
+    return {
+      getList,
+      startDrag,
+      onDrop
+    }
+  }
 }
 </script>
 
