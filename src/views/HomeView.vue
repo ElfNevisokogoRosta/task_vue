@@ -5,19 +5,18 @@ import TaskList from '../components/TaskList.vue'
 
 <template>
   <main>
-    
     <div class="componet-wraper">
-        <TaskForm />
-        <TaskList />
+      <TaskForm />
+      <TaskList />
     </div>
   </main>
 </template>
 <style>
 .subheade-wraper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 10px;
+  gap: 10px;
 }
 .image-wraper {
   width: 50px;
@@ -33,10 +32,9 @@ import TaskList from '../components/TaskList.vue'
   height: 100%;
   object-fit: cover;
 }
-.componet-wraper{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.componet-wraper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: 30px;
 }
 </style>

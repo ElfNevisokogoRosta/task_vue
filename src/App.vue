@@ -1,11 +1,11 @@
 <script setup>
-import {  RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
+  <header class="header">
     <div class="subheade-wraper">
-      <h2>TaskMaster</h2>
+      <h2 class="main-title">TaskMaster</h2>
       <div class="image-wraper">
         <img class="logo-img" src="@/assets/logo.png" alt="" />
       </div>

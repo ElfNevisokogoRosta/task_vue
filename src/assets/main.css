@@ -1,5 +1,96 @@
-#app{
+* {
+  box-sizing: border-box;
+}
+#app {
   width: 1280px;
   margin-left: auto;
   margin-right: auto;
+}
+body {
+  background: #292929;
+  font-family: 'Nunito', sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #fff;
+  height: 50vh;
+  border-radius: 30px;
+  padding-top: 70px;
+}
+.title {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.input-box {
+  display: block;
+  width: 100%;
+  border: none;
+}
+.input-title {
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  padding-left: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 4px;
+  font-weight: bold;
+  border: none;
+}
+.input-des {
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: none;
+  padding-left: 14px;
+  padding-top: 6px;
+  padding-bottom: 4px;
+  padding-right: 4px;
+  border: none;
+}
+.task-form-button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+  width: 12.5rem;
+  height: 3.125rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.875;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background-color: #2196f3;
+  border-radius: 4px;
+  transition: background-color 250ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.task-form-button:hover {
+  background-color: #292929;
+}
+.main-title {
+  font-size: 48px;
+  color: #fff;
 }
