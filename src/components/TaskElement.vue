@@ -4,7 +4,7 @@ import { useTaskStore } from '../pinia/store/store'
 const store = useTaskStore()
 const props = defineProps(['task'])
 
-const { id, title, description, list } = props.task
+const { id, title, dis, list } = props.task
 
 const deleteTask = () => {
   store.deleteTask(id)
@@ -14,7 +14,7 @@ const deleteTask = () => {
   <li class="task-element" v-bind="{ id }">
     <h3 class="task-title">{{ title }}</h3>
     <p class="task-des">
-      {{ description }}
+      {{ dis }}
     </p>
     <button v-if="list === 2" @click="deleteTask" class="delete-btn">Delete</button>
   </li>

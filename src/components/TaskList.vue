@@ -2,6 +2,7 @@
 import TaskElement from './TaskElement.vue'
 import { useTaskStore } from '../pinia/store/store'
 
+
 export default {
   components: {
     TaskElement
@@ -9,7 +10,7 @@ export default {
   setup() {
     const store = useTaskStore()
 
-    const getList = (list) => {
+    const getList =  (list) => {
       return store.tasks.filter((t) => t.list === list)
     }
     const startDrag = (e, i) => {

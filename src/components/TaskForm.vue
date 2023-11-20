@@ -7,8 +7,8 @@ const store = useTaskStore()
 const task = ref({
   id: nanoid(),
   title: '',
-  description: '',
-  complete: false
+  dis: '',
+  list: 2
 })
 
 const taskHandler = (e) => {
