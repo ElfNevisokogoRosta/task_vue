@@ -39,7 +39,7 @@ export default {
       //     loading.value = false
       //     console.log(err)
       //   })
-      // ;(usernameValue.value = ''), (passwordValue.value = ''), e.target.reset()
+      // ;(usernameValue.value = ''), (passwordValue.value = '')
       return localStorage.setItem('token', "123123123")
     }
     return {
