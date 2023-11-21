@@ -7,7 +7,7 @@ import { RouterView } from 'vue-router'
     <div class="subheade-wraper">
       <h2 class="main-title">TaskMaster</h2>
       <div class="image-wraper">
-        <img class="logo-img" src="@/assets/logo.png" alt="" />
+        <RouterLink to="/"> <img class="logo-img" src="@/assets/logo.png" alt="" /></RouterLink>
       </div>
     </div>
   </header>
@@ -15,4 +15,21 @@ import { RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+.header {
+  padding: 30px 0px;
+}
+.subheade-wraper {
+  display: flex;
+  justify-content: space-between;
+  width: 1280px;
+  margin: 0px auto;
+}
+.logo-img {
+  width: 80px;
+  height: 80px;
+}
+.main-title{
+  cursor: default;
+}
+</style>

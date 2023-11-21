@@ -23,10 +23,10 @@ export const useTaskStore = defineStore('task', {
       if (index === -1) {
         return alert('Smt wrong, run away')
       }
-      if (this.tasks[index].list === 1) {
-        return (this.tasks[index].list = 2)
+      if (this.tasks[index].list === 'undone') {
+        return (this.tasks[index].list = 'done')
       }
-      this.tasks[index].list = 1
+      this.tasks[index].list = 'undone'
     }
   }
 })

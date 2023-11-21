@@ -16,7 +16,7 @@ const deleteTask = () => {
     <p class="task-des">
       {{ dis }}
     </p>
-    <button v-if="list === 2" @click="deleteTask" class="delete-btn">Delete</button>
+    <button v-if="list === 'done'" @click="deleteTask" class="delete-btn">Delete</button>
   </li>
 </template>
 <style>
@@ -31,6 +31,7 @@ const deleteTask = () => {
   border: 1px solid #3e3e3e;
   background-color: #363636;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+  cursor: grab;
 }
 .task-des {
   color: #c6c6c6;

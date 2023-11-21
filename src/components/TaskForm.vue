@@ -5,10 +5,8 @@ import { nanoid } from 'nanoid'
 
 const store = useTaskStore()
 const task = ref({
-  id: nanoid(),
   title: '',
-  dis: '',
-  list: 2
+  dis: ''
 })
 
 const taskHandler = (e) => {
@@ -17,7 +15,14 @@ const taskHandler = (e) => {
 }
 
 function addTask(e) {
-  store.addTask(task.value)
+  if (task.value.title === '') {
+    return alert('enter task title')
+  }
+  if (task.value.dis === '') {
+    return alert('enter task discription')
+  }
+  const newTask = { ...task.value, id: nanoid(), list: 'undone' }
+  store.addTask(newTask)
   e.target.reset()
 }
 </script>

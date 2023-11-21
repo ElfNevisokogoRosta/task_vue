@@ -35,9 +35,9 @@ export default {
   <div class="task-holder">
     <div class="task-column">
       <h2 class="task-column-title">In Progress</h2>
-      <ul class="task-list" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
+      <ul class="task-list" @drop="onDrop($event,'undone')" @dragenter.prevent @dragover.prevent>
         <TaskElement
-          v-for="task in getList(1)"
+          v-for="task in getList('undone')"
           :key="task.id"
           draggable="true"
           @dragstart="startDrag($event, task)"
@@ -48,9 +48,9 @@ export default {
     </div>
     <div class="task-column">
       <h2 class="task-column-title-done task-column-title">Done</h2>
-      <ul class="task-list" @drop="onDrop($event, 2)" @dragenter.prevent @dragover.prevent>
+      <ul class="task-list" @drop="onDrop($event, 'done')" @dragenter.prevent @dragover.prevent>
         <TaskElement
-          v-for="task in getList(2)"
+          v-for="task in getList('done')"
           :key="task.id"
           draggable="true"
           @dragstart="startDrag($event, task)"
