@@ -1,28 +1,38 @@
 <script setup>
-import { useTaskStore } from '../pinia/store/store'
-import { ref } from 'vue'
-import { nanoid } from 'nanoid'
-
-const store = useTaskStore()
-const task = ref({
+import { reactive } from 'vue'
+import { useUserStore } from '../pinia/store/userStore';
+import { useTasksStore } from '../pinia/store/tasksStore';
+const task = reactive({
   title: '',
-  dis: ''
+  dis: '',
+  isLoading: '',
+  isError: null,
 })
-
+const taskStore = useTasksStore();
+const store = useUserStore()
 const taskHandler = (e) => {
   const fieldName = e.target.name
-  task.value[fieldName] = e.target.value
+  task[fieldName] = e.target.value
 }
 
-function addTask(e) {
-  if (task.value.title === '') {
+const addTask = async (e) => {
+  const { title, dis } = task
+  if (title === '') {
     return alert('enter task title')
   }
-  if (task.value.dis === '') {
+  if (dis === '') {
     return alert('enter task discription')
   }
-  const newTask = { ...task.value, id: nanoid(), list: 'undone' }
-  store.addTask(newTask)
+  const newTask = { title, dis, list: 'undone' }
+  await taskStore.addNewTask(store.id, newTask);
+  // task.isLoading = true
+  // try {
+  //   taskApi.addNew(store.id, newTask)
+  //   task.isLoading = false
+  // } catch (error) {
+  //   task.isError = error
+  // }
+
   e.target.reset()
 }
 </script>
@@ -32,28 +42,12 @@ function addTask(e) {
     <form @submit.prevent="addTask">
       <div class="form-container">
         <label class="input-box" for="title">
-          <input
-            @change="taskHandler"
-            id="title"
-            class="input-title"
-            name="title"
-            type="text"
-            maxlength="50"
-            placeholder="Task title"
-            :value="task.title"
-          />
+          <input @change="taskHandler" id="title" class="input-title" name="title" type="text" maxlength="50"
+            placeholder="Task title" :value="task.title" />
         </label>
         <label class="input-box" for="story">
-          <textarea
-            @change="taskHandler"
-            class="input-des"
-            id="story"
-            name="dis"
-            rows="5"
-            cols="33"
-            placeholder="Task description"
-            :value="task.description"
-          >
+          <textarea @change="taskHandler" class="input-des" id="story" name="dis" rows="5" cols="33"
+            placeholder="Task description" :value="task.description">
           </textarea>
         </label>
         <button class="task-form-button">Add task</button>
@@ -62,3 +56,4 @@ function addTask(e) {
   </div>
 </template>
 <style></style>
+../pinia/store/userStore

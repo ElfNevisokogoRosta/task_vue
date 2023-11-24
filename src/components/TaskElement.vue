@@ -1,13 +1,13 @@
 <script setup>
-import { useTaskStore } from '../pinia/store/store'
+import { useTasksStore } from '../pinia/store/tasksStore';
 
-const store = useTaskStore()
+
 const props = defineProps(['task'])
-
+const taskStore = useTasksStore();
 const { id, title, dis, list } = props.task
 
 const deleteTask = () => {
-  store.deleteTask(id)
+  taskStore.deleteTask(id)
 }
 </script>
 <template>
@@ -33,6 +33,7 @@ const deleteTask = () => {
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
   cursor: grab;
 }
+
 .task-des {
   color: #c6c6c6;
   width: 377px;
@@ -44,6 +45,7 @@ const deleteTask = () => {
   overflow: hidden;
   white-space: normal;
 }
+
 .task-title {
   margin: 0;
   padding: 0;
@@ -55,6 +57,7 @@ const deleteTask = () => {
   background: #000;
   color: #fff;
 }
+
 .delete-btn {
   width: 100px;
   margin: 0;
@@ -68,5 +71,4 @@ const deleteTask = () => {
   cursor: pointer;
   color: #fff;
   background-color: #6b5d5c;
-}
-</style>
+}</style>

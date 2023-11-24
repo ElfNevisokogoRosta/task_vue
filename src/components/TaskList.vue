@@ -1,62 +1,67 @@
-<script>
+<script setup>
 import TaskElement from './TaskElement.vue'
-import { useTaskStore } from '../pinia/store/store'
+import { computed, onMounted, reactive } from 'vue';
+import { useTasksStore } from '../pinia/store/tasksStore';
+import { useUserStore } from '../pinia/store/userStore';
 
+const userStore = useUserStore();
+const taskStore = useTasksStore();
+onMounted(async () => {
+  await taskStore.initTask(userStore.id);
+})
+const tasks = reactive({
+  isLoading: false,
+  isError: null,
+});
 
-export default {
-  components: {
-    TaskElement
-  },
-  setup() {
-    const store = useTaskStore()
-
-    const getList =  (list) => {
-      return store.tasks.filter((t) => t.list === list)
-    }
-    const startDrag = (e, i) => {
-      e.dataTransfer.dropEffect = 'move'
-      e.dataTransfer.effectAllowed = 'move'
-      e.dataTransfer.setData('itemID', i.id)
-    }
-    const onDrop = (e) => {
-      const id = e.dataTransfer.getData('itemID')
-      store.editTask(id)
-    }
-    return {
-      getList,
-      startDrag,
-      onDrop
-    }
+const done = computed(
+  () => {
+    return taskStore.getDone;
   }
+)
+const undone = computed(
+  () => {
+    return taskStore.getUndone;
+  }
+)
+const startDrag = (e, i) => {
+  e.dataTransfer.dropEffect = 'move'
+  e.dataTransfer.effectAllowed = 'move'
+  e.dataTransfer.setData('itemID', i.id)
+}
+const onDrop = async (e) => {
+  const id = e.dataTransfer.getData('itemID')
+  tasks.isLoading = true;
+  try {
+    await taskStore.updateTask(id)
+    tasks.isLoading = false;
+  } catch (error) {
+    tasks.isError = error
+  }
+ 
 }
 </script>
 
+
 <template>
   <div class="task-holder">
+    <div v-if="isLoading" class="task-loader">
+    <svg class="task-icon">
+      <rect width="100" height="100" />
+    </svg>
+    </div>
     <div class="task-column">
       <h2 class="task-column-title">In Progress</h2>
-      <ul class="task-list" @drop="onDrop($event,'undone')" @dragenter.prevent @dragover.prevent>
-        <TaskElement
-          v-for="task in getList('undone')"
-          :key="task.id"
-          draggable="true"
-          @dragstart="startDrag($event, task)"
-          :task="task"
-        >
-        </TaskElement>
+      <ul class="task-list" @drop="onDrop($event, 'undone')" @dragenter.prevent @dragover.prevent>
+        <TaskElement v-for="task in undone" :key="`${task.id} ${task.list}`" draggable="true"
+          @dragstart="startDrag($event, task)" :task="task" />
       </ul>
     </div>
     <div class="task-column">
       <h2 class="task-column-title-done task-column-title">Done</h2>
       <ul class="task-list" @drop="onDrop($event, 'done')" @dragenter.prevent @dragover.prevent>
-        <TaskElement
-          v-for="task in getList('done')"
-          :key="task.id"
-          draggable="true"
-          @dragstart="startDrag($event, task)"
-          :task="task"
-        >
-        </TaskElement>
+        <TaskElement v-for="task in done" :key="task.id" draggable="true" @dragstart="startDrag($event, task)"
+          :task="task" />
       </ul>
     </div>
   </div>
@@ -67,6 +72,23 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  position: relative;
+}
+.task-loader{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 254, 253, 0.226);
+}
+.task-icon{
+  width: 80px;
+  height: 80px;
+
 }
 .task-column {
   display: flex;
@@ -77,6 +99,7 @@ export default {
   border: 1px solid #454545;
   background-color: #454545;
 }
+
 .task-column-title {
   padding: 0;
   margin: 0;
@@ -87,9 +110,11 @@ export default {
   text-align: center;
   color: #fff;
 }
+
 .task-column-title-done {
   background-color: #106354;
 }
+
 .task-list {
   width: 100%;
   height: 100%;
@@ -105,3 +130,4 @@ export default {
   min-height: 40px;
 }
 </style>
+../pinia/store/userStore
